@@ -1,39 +1,3 @@
-import os
-import sys
-import random
-import pygame
-import speech_recognition as sr
-from collections import deque
-
-class Player(object):
-    def __init__(self, initial_position):
-        self.rect = pygame.Rect(initial_position[0], initial_position[1], 16, 16)
-
-    def move(self, dx, dy):
-        new_rect = self.rect.move(dx, dy)
-        if not collides_with_walls(new_rect):
-            self.rect = new_rect
-
-class Wall(object):
-    def __init__(self, pos):
-        walls.append(self)
-        self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
-
-def collides_with_walls(rect):
-    for wall in walls:
-        if rect.colliderect(wall.rect):
-            return True
-    return False
-
-def bfs(start, target):
-    queue = deque([(start, [])])
-    visited = set([start])
-
-    while queue:
-        current, path = queue.popleft()
-
-        if current == target:
-            return path
 
 import os
 import sys
@@ -182,35 +146,185 @@ while running:
     try:
         recognized_text = recognizer.recognize_google(audio, language="es-ES")
         print("Recognized text:", recognized_text)
-
+        x, y = player.rect.x, player.rect.y
+        target_position=(36,108)
+        target_x, target_y = target_position
         # Process recognized text and move the player accordingly
-        if  recognized_text.upper() in ["A", "B", "C", "D", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"]:
-            target_positions = get_player_positions(recognized_text)
-            x, y = player.rect.x, player.rect.y
+        if ("calle" in recognized_text.lower() or "avenida" in recognized_text.lower()) and not "esquina" in recognized_text.lower():
+            
+            if "profe inolvidable" in recognized_text.lower():
+                target_position=(36,108)
+            elif "del vocabulario" in recognized_text.lower():
+                target_position=(432,108)
+            elif "del ser y estar" in recognized_text.lower():
+                target_position=(216,198)
+            elif "del institutocervantes" in recognized_text.lower():
+                target_position=(450,198)
+            elif "hablo español" in recognized_text.lower():
+                target_position=(126,306)
+            elif "del del profeDeEle.es" in recognized_text.lower():
+                target_position=(504,306)
+            elif "del sustantivo" in recognized_text.lower():
+                target_position=(144,414)
+            elif "del me gusta" in recognized_text.lower():
+                target_position=(612,414)
+            elif "de los errores" in recognized_text.lower():
+                target_position=(612,414)
+            elif "por y para" in recognized_text.lower():
+                target_position=(612,414)
+            elif "de las dudas" in recognized_text.lower():
+                target_position=(612,90)
 
-            for target_position in target_positions:
-                target_x, target_y = target_position
-                
-                if x == target_x and y == target_y:
-                    print("Already at the target position.")
-                else:
-                    print("Enters here")
-                    print(target_x, target_y)
-                    
-                    path = bfs((x, y), target_position)
-                    if path:
-                        for step in path:
-                            x, y = step
-                            player.move(x - player.rect.x, y - player.rect.y)
-                            pygame.time.delay(100)  # Delay between each step
-                            # Draw the scene after each step
-                            screen.blit(back, (0, 0, 1000, 540))
-                            for wall in walls:
-                                screen.blit(transparent_image, wall.rect)
-                            pygame.draw.rect(screen, (255, 20, 0), player.rect)
-                            pygame.display.flip()
-                    else:
-                        print("No path found.")
+        elif "esquina" in recognized_text.lower():
+            if "profe inolvidable"  in recognized_text.lower() and "adjetivo" in recognized_text.lower():
+                target_position=(90,108)
+            elif "hablo español" in recognized_text.lower() and "adjetivo" in recognized_text.lower():
+                target_position=(90,306)
+            elif "sustantivo" in recognized_text.lower() and "siele" in recognized_text.lower():
+                target_position=(90,414)
+            elif "errores" in recognized_text.lower() and "siele" in recognized_text.lower():
+                target_position=(90,504)
+            elif "deberes hechos" in recognized_text.lower() and "errores" in recognized_text.lower():
+                target_position=(180,504)
+            elif "deberes hechos" in recognized_text.lower() and "sustantivo" in recognized_text.lower():
+                target_position=(180,414)
+            elif "deberes hechos" in recognized_text.lower() and "hablo español" in recognized_text.lower():
+                target_position=(180,306)
+            elif "deberes hechos" in recognized_text.lower() and "ser y estar" in recognized_text.lower():
+                target_position=(180,198)
+            elif "errores" in recognized_text.lower() and "indicativo" in recognized_text.lower():
+                target_position=(324,504)
+            elif "sustantivo" in recognized_text.lower() and "indicativo" in recognized_text.lower():
+                target_position=(324,414)
+            elif "ser y estar"  in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
+                target_position=(324,342)
+            elif "profe inolvidable" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
+                target_position=(324,198)
+            elif "vocabulario" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
+                target_position=(324,108)
+            elif "vocabulario" in recognized_text.lower() and "dudas" in recognized_text.lower():
+                target_position=(612,108)
+            elif "instituto cervantes" in recognized_text.lower() and "dudas" in recognized_text.lower():
+                target_position=(612,198)
+            elif "profedeele.es" in recognized_text.lower() and "verbos" in recognized_text.lower():
+                target_position=(486,306)
+            elif "por y para" in recognized_text.lower() and "verbos" in recognized_text.lower():
+                target_position=(486,504)
+            elif "por y para" in recognized_text.lower() and "gramatica" in recognized_text.lower():
+                target_position=(576,504)
+            elif "me gusta" in recognized_text.lower() and "gramatica" in recognized_text.lower():
+                target_position=(576,414)
+            elif "me gusta" in recognized_text.lower() and "verbos" in recognized_text.lower():
+                target_position=(486,414)
+        
+        else:
+            if "juguetería"  in recognized_text.lower():
+                target_position=(36,108)
+            elif "lavandería" in recognized_text.lower():
+                target_position=(144,108)
+            elif "frutería" in recognized_text.lower():
+                target_position=(234,108)
+            elif "supermercado" in recognized_text.lower():
+                target_position=(288,108)
+            elif "restaurante" in recognized_text.lower():
+                target_position=(360,108)
+            elif "panadería" in recognized_text.lower():
+                target_position=(432,108)
+            elif "pescadería" in recognized_text.lower():
+                target_position=(522,108)
+            elif "vetenerinario" in recognized_text.lower():
+                target_position=(576,108)
+            elif "gasolinería" in recognized_text.lower():
+                target_position=(666,108)
+            elif "escuela" in recognized_text.lower():
+                target_position=(90,180)
+            elif "carnicería" in recognized_text.lower():
+                target_position=(90,180)
+            elif "tienda de instrumentos" in recognized_text.lower():
+                target_position=(216,198)
+            elif "librería" in recognized_text.lower():
+                target_position=(270,198)
+            elif "sala de conciertos" in recognized_text.lower():
+                target_position=(378,198)
+            elif "cine" in recognized_text.lower():
+                target_position=(450,198)
+            elif "quiosco" in recognized_text.lower():
+                target_position=(522,198)
+            elif "academia de idiomas" in recognized_text.lower():
+                target_position=(576,198)
+            elif "pizzería" in recognized_text.lower():
+                target_position=(684,198)
+            elif "aparcamiento" in recognized_text.lower():
+                target_position=(90,234)
+            elif "iglesia" in recognized_text.lower():
+                target_position=(180,234)
+            elif "ayuntamiento" in recognized_text.lower():
+                target_position=(324,234)
+            elif "cafetería" in recognized_text.lower():
+                target_position=(180,306)
+            elif "herboristería" in recognized_text.lower():
+                target_position=(126,306)
+            elif "correos" in recognized_text.lower():
+                target_position=(234,306)
+            elif "parada de autobus" in recognized_text.lower():
+                target_position=(234,306)
+            elif "banco" in recognized_text.lower():
+                target_position=(450,306)
+            elif "embajada" in recognized_text.lower():
+                target_position=(504,306)
+            elif "hotel" in recognized_text.lower():
+                target_position=(558,306)
+            elif "comisaría de policía" in recognized_text.lower():
+                target_position=(630,306)
+            elif "monumento" in recognized_text.lower():
+                target_position=(666,306)
+            elif "estación de bomberos" in recognized_text.lower():
+                target_position=(540,414)
+            elif "museo" in recognized_text.lower():
+                target_position=(144,414)
+            elif "hospital" in recognized_text.lower():
+                target_position=(216,414)
+            elif "floristería" in recognized_text.lower():
+                target_position=(288,414)
+            elif "parque ele" in recognized_text.lower() or "biblioteca" in recognized_text.lower() or "teatro" in recognized_text.lower():
+                target_position=(324,414)
+            elif "universidad" in recognized_text.lower():
+                target_position=(540,414)
+            elif "bar" in recognized_text.lower():
+                target_position=(612,414)
+            elif "estación de tren" in recognized_text.lower():
+                target_position=(684,414)
+            elif "peluquería" in recognized_text.lower():
+                target_position=(540,504)
+            elif "centro comercial" in recognized_text.lower():
+                target_position=(144,504)
+            elif "farmacia" in recognized_text.lower():
+                target_position=(270,504)
+            elif "tienda de ropa" in recognized_text.lower():
+                target_position=(558,504)
+            elif "casa de pepe" in recognized_text.lower():
+                target_position=(630,504)
+            elif "ambulatorio" in recognized_text.lower():
+                target_position=(684,504)
+        #for target_position in target_positions:
+        target_x, target_y = target_position
+        if x == target_x and y == target_y:
+            print("Ya se encuentra en el lugar")
+        else:    
+            path = bfs((x, y),target_position)
+        if path:
+                    for step in path:
+                        x, y = step
+                        player.move(x - player.rect.x, y - player.rect.y)
+                        pygame.time.delay(100)  # Delay between each step
+                        # Draw the scene after each step
+                        screen.blit(back, (0, 0, 1000, 540))
+                        for wall in walls:
+                            screen.blit(transparent_image, wall.rect)
+                        pygame.draw.rect(screen, (255, 20, 0), player.rect)
+                        pygame.display.flip()
+        else:
+                    print("No se encontró un camino")
         print("Player Position:", player.rect.x, player.rect.y)
     except sr.UnknownValueError:
         print("Unable to recognize audio.")
