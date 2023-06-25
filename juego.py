@@ -124,7 +124,7 @@ for y in range(len(level)):
             Wall((x * 18, y * 18))
 
 running = True
-back = pygame.image.load("mapaProyecto1.jpg")
+back = pygame.image.load("ReconocimientoDeVoz/mapaProyecto1.jpg")
 
 # Initialize the speech recognizer
 recognizer = sr.Recognizer()
@@ -145,7 +145,7 @@ while running:
 
     try:
         recognized_text = recognizer.recognize_google(audio, language="es-ES")
-        print("Recognized text:", recognized_text)
+        print("Recognized text:", recognized_text.lower())
         x, y = player.rect.x, player.rect.y
         target_position=(36,108)
         target_x, target_y = target_position
@@ -174,6 +174,8 @@ while running:
                 target_position=(612,414)
             elif "de las dudas" in recognized_text.lower():
                 target_position=(612,90)
+            elif "de los verbos" in recognized_text.lower():
+                target_position=(486,414)
 
         elif "esquina" in recognized_text.lower():
             if "profe inolvidable"  in recognized_text.lower() and "adjetivo" in recognized_text.lower():
