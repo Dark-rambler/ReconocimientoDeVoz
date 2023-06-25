@@ -150,7 +150,7 @@ while running:
         target_position=(36,108)
         target_x, target_y = target_position
         # Process recognized text and move the player accordingly
-        if ("calle" in recognized_text.lower() or "avenida" in recognized_text.lower()) and not "esquina" in recognized_text.lower():
+        if ("calle" in recognized_text.lower() or "avenida" in recognized_text.lower()) and "esquina" not in recognized_text.lower():
             
             if "profe inolvidable" in recognized_text.lower():
                 target_position=(36,108)
@@ -162,7 +162,7 @@ while running:
                 target_position=(450,198)
             elif "hablo español" in recognized_text.lower():
                 target_position=(126,306)
-            elif "del del profeDeEle.es" in recognized_text.lower():
+            elif "profedeele" in recognized_text.lower():
                 target_position=(504,306)
             elif "del sustantivo" in recognized_text.lower():
                 target_position=(144,414)
@@ -174,6 +174,8 @@ while running:
                 target_position=(612,414)
             elif "de las dudas" in recognized_text.lower():
                 target_position=(612,90)
+            else :
+                print("esa calleno se ha reconocido")
 
         elif "esquina" in recognized_text.lower():
             if "profe inolvidable"  in recognized_text.lower() and "adjetivo" in recognized_text.lower():
@@ -206,7 +208,7 @@ while running:
                 target_position=(612,108)
             elif "instituto cervantes" in recognized_text.lower() and "dudas" in recognized_text.lower():
                 target_position=(612,198)
-            elif "profedeele.es" in recognized_text.lower() and "verbos" in recognized_text.lower():
+            elif "profedeele" in recognized_text.lower() and "verbos" in recognized_text.lower():
                 target_position=(486,306)
             elif "por y para" in recognized_text.lower() and "verbos" in recognized_text.lower():
                 target_position=(486,504)
@@ -216,6 +218,8 @@ while running:
                 target_position=(576,414)
             elif "me gusta" in recognized_text.lower() and "verbos" in recognized_text.lower():
                 target_position=(486,414)
+            else :
+                print("esa calleno se ha reconocido")
         
         else:
             if "juguetería"  in recognized_text.lower():
@@ -286,7 +290,7 @@ while running:
                 target_position=(216,414)
             elif "floristería" in recognized_text.lower():
                 target_position=(288,414)
-            elif "parque ele" in recognized_text.lower() or "biblioteca" in recognized_text.lower() or "teatro" in recognized_text.lower():
+            elif "parque" in recognized_text.lower() or "biblioteca" in recognized_text.lower() or "teatro" in recognized_text.lower():
                 target_position=(324,414)
             elif "universidad" in recognized_text.lower():
                 target_position=(540,414)
@@ -306,6 +310,8 @@ while running:
                 target_position=(630,504)
             elif "ambulatorio" in recognized_text.lower():
                 target_position=(684,504)
+            else :
+                print("esa calleno se ha reconocido")
         #for target_position in target_positions:
         target_x, target_y = target_position
         if x == target_x and y == target_y:
