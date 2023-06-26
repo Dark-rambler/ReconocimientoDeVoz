@@ -127,7 +127,7 @@ for y in range(len(level)):
             Wall((x * 18, y * 18))
 
 running = True
-back = pygame.image.load("ReconocimientoDeVoz/mapaProyecto1.jpg")
+back = pygame.image.load("mapaProyecto1.jpg")
 
 # Initialize the speech recognizer
 recognizer = sr.Recognizer()
@@ -227,7 +227,7 @@ while running:
                 elif "sustantivo" in recognized_text.lower() and "indicativo" in recognized_text.lower():
                     target_position=(324,414)
                 elif "ser y estar"  in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
-                    target_position=(324,342)
+                    target_position=(324,198)
                 elif "profe inolvidable" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
                     target_position=(324,198)
                 elif "vocabulario" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
