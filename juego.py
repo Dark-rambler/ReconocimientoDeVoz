@@ -59,6 +59,29 @@ clock = pygame.time.Clock()
 walls = []
 player = Player((18,108))
 
+#coordenadas en X
+PROFE_INOLVIDABLE = [90,324]
+VOCABULARIO = [324,612]
+SER_Y_ESTAR = [180,324]
+INSTITUTO = [612, 324, 684]
+HABLO_ESPANIOL = [90, 180, 288]
+PROFEDEELE = [306]
+SUSTANTIVO = [90, 180, 324]
+ME_GUSTA = [486,576]
+ERRORES = [90, 180, 324]
+POR_Y_PARA = [486,576]
+
+#coordenadas en Y
+ADJETIVO = [108,306]
+SIELE = [414, 504]
+DEBERES_HECHOS = [306, 414, 504]
+INDICATIVO = [414, 504]
+SUBJUNTIVO = [108, 198]
+DUDAS = [108, 198]
+Ñ = [198]
+VERBOS = [306, 486, 504]
+GRAMÁTICA = [306, 414, 504]
+
 # Holds the level layout in a matrix of arrays.
 level = [
     list("                                         "),
@@ -156,11 +179,116 @@ while running:
             recognized_text = recognizer.recognize_google(audio, language="es-ES")
             print("Texto reconocido:", recognized_text.lower())
             x, y = player.rect.x, player.rect.y
+            print(x,y)
             target_position=(x,y)
             target_x, target_y = target_position
             # Process recognized text and move the player accordingly
-            if ("calle" in recognized_text.lower() or "avenida" in recognized_text.lower()) and "esquina" not in recognized_text.lower():
+            
+            if("avanzar" in recognized_text.lower() and "cuadra" in recognized_text.lower()):
+                if("profe inolvidable" in recognized_text.lower() and x in PROFE_INOLVIDABLE):
+                    if(PROFE_INOLVIDABLE.index(x) == len(PROFE_INOLVIDABLE)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(PROFE_INOLVIDABLE[PROFE_INOLVIDABLE.index(x)+1], 108)
+                elif("vocabulario" in recognized_text.lower() and x in VOCABULARIO):
+                    if(VOCABULARIO.index(x) == len(VOCABULARIO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(VOCABULARIO[VOCABULARIO.index(x)+1], 108)
+                elif("ser y estar" in recognized_text.lower() and x in SER_Y_ESTAR):
+                    if(SER_Y_ESTAR.index(x) == len(SER_Y_ESTAR)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(SER_Y_ESTAR[SER_Y_ESTAR.index(x)+1], 198)
+                elif("instituto cervantes" in recognized_text.lower() and x in INSTITUTO):
+                    if(INSTITUTO.index(x) == len(INSTITUTO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(SER_Y_ESTAR[SER_Y_ESTAR.index(x)+1], 198)
+                elif("hablo español" in recognized_text.lower() and x in HABLO_ESPANIOL):
+                    if(HABLO_ESPANIOL.index(x) == len(HABLO_ESPANIOL)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(HABLO_ESPANIOL[HABLO_ESPANIOL.index(x)+1], 306)
+                elif("profedeele.es" in recognized_text.lower() and x in PROFEDEELE):
+                    if(PROFEDEELE.index(x) == len(PROFE_INOLVIDABLE)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(PROFEDEELE[SER_Y_ESTAR.index(x)+1], 306)
+                elif("sustantivo" in recognized_text.lower() and x in SUSTANTIVO):
+                    if(SUSTANTIVO.index(x) == len(SUSTANTIVO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(SUSTANTIVO[SUSTANTIVO.index(x)+1], 414)
+                elif("me gusta" in recognized_text.lower() and x in ME_GUSTA):
+                    if(ME_GUSTA.index(x) == len(ME_GUSTA)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(ME_GUSTA[ME_GUSTA.index(x)+1], 414)
+                elif("errores" in recognized_text.lower() and x in ERRORES):
+                    if(ERRORES.index(x) == len(ERRORES)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(ERRORES[ERRORES.index(x)+1], 504)
+                elif("por y para" in recognized_text.lower() and x in POR_Y_PARA):
+                    if(POR_Y_PARA.index(x) == len(POR_Y_PARA)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(POR_Y_PARA[POR_Y_PARA.index(x)+1], 504)
+                #PARA EL EJE VERTICAL
+                elif("adjetivo" in recognized_text.lower() and y in ADJETIVO):
+                    if(ADJETIVO.index(y) == len(ADJETIVO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(90, ADJETIVO[ADJETIVO.index(y)+1])
+                elif("siele" in recognized_text.lower() and y in PROFE_INOLVIDABLE):
+                    if(SIELE.index(y) == len(SIELE)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(90, SIELE[SIELE.index(y)+1])
+                elif("deberes hechos" in recognized_text.lower() and y in DEBERES_HECHOS):
+                    if(DEBERES_HECHOS.index(y) == len(DEBERES_HECHOS)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(180, DEBERES_HECHOS[DEBERES_HECHOS.index(y)+1])
+                elif("indicativo" in recognized_text.lower() and y in INDICATIVO):
+                    if(INDICATIVO.index(y) == len(INDICATIVO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(324, INDICATIVO[INDICATIVO.index(y)+1])
+                elif("subjuntivo" in recognized_text.lower() and y in SUBJUNTIVO):
+                    if(SUBJUNTIVO.index(y) == len(SUBJUNTIVO)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(324, SUBJUNTIVO[SUBJUNTIVO.index(y)+1])
+                elif("dudas" in recognized_text.lower() and y in DUDAS):
+                    if(DUDAS.index(y) == len(DUDAS)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(612, DUDAS[DUDAS.index(y)+1])
+                elif("de la ñ" in recognized_text.lower() and y in Ñ):
+                    if(Ñ.index(y) == len(Ñ)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(612, Ñ[Ñ.index(y)+1])
+                elif("verbos" in recognized_text.lower() and y in VERBOS):
+                    if(VERBOS.index(y) == len(VERBOS)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(486, VERBOS[VERBOS.index(y)+1])
                 
+                elif("gramática" in recognized_text.lower() and y in GRAMÁTICA):
+                    if(GRAMÁTICA.index(y) == len(GRAMÁTICA)-1):
+                        print("Ya no se puede avanzar")
+                    else:
+                        target_position=(576, GRAMÁTICA[GRAMÁTICA.index(y)+1])
+                else:
+                    print("Ya no se puede avanzar")
+                        
+
+            if ("calle" in recognized_text.lower() or "avenida" in recognized_text.lower()) and not ("esquina" in recognized_text.lower() or "avanzar" in recognized_text.lower()):
+                
+                print("entra a donde no debería")                
                 if "profe inolvidable" in recognized_text.lower():
                     target_position=(36,108)
                 elif "del vocabulario" in recognized_text.lower():
@@ -177,7 +305,6 @@ while running:
                     target_position=(144,414)
                 elif "me gusta" in recognized_text.lower():
                     target_position=(612,414)
-                
                 elif "errores" in recognized_text.lower():
                     target_position=(144,504)
                 elif "por y para" in recognized_text.lower():
@@ -186,10 +313,8 @@ while running:
                     target_position=(90,180)
                 elif "subjuntivo" in recognized_text.lower():
                     target_position=(324,198)
-                
                 elif "dudas" in recognized_text.lower():
                     target_position=(612,90)
-                
                 elif "ñ" in recognized_text.lower():
                     target_position=(684, 234)
                 elif "siele" in recognized_text.lower():
@@ -208,7 +333,7 @@ while running:
             elif "esquina" in recognized_text.lower():
                 if "profe inolvidable"  in recognized_text.lower() and "adjetivo" in recognized_text.lower():
                     target_position=(90,108)
-                elif "hablo español" in recognized_text.lower() and "adjetivo" in recognized_text.lower():
+                elif "hablo español" in recognized_text.lower() and ("adjetivo" in recognized_text.lower() or "siele" in recognized_text.lower()):
                     target_position=(90,306)
                 elif "sustantivo" in recognized_text.lower() and "siele" in recognized_text.lower():
                     target_position=(90,414)
@@ -226,18 +351,22 @@ while running:
                     target_position=(324,504)
                 elif "sustantivo" in recognized_text.lower() and "indicativo" in recognized_text.lower():
                     target_position=(324,414)
-                elif "ser y estar"  in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
-                    target_position=(324,342)
-                elif "profe inolvidable" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
+                elif ("ser y estar"  in recognized_text.lower() or "instituto cervantes"  in recognized_text.lower()) and "subjuntivo" in recognized_text.lower():
                     target_position=(324,198)
+                elif "profe inolvidable" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
+                    target_position=(324,108)
                 elif "vocabulario" in recognized_text.lower() and "subjuntivo" in recognized_text.lower():
                     target_position=(324,108)
                 elif "vocabulario" in recognized_text.lower() and "dudas" in recognized_text.lower():
                     target_position=(612,108)
                 elif "instituto cervantes" in recognized_text.lower() and "dudas" in recognized_text.lower():
                     target_position=(612,198)
+                elif "instituto cervantes" in recognized_text.lower() and "de la ñ" in recognized_text.lower():
+                    target_position=(684,198)
                 elif "profedeele" in recognized_text.lower() and "verbos" in recognized_text.lower():
                     target_position=(486,306)
+                elif "profedeele" in recognized_text.lower() and "gramática" in recognized_text.lower():
+                    target_position=(576,306)
                 elif "por y para" in recognized_text.lower() and "verbos" in recognized_text.lower():
                     target_position=(486,504)
                 elif "por y para" in recognized_text.lower() and "gramatica" in recognized_text.lower():
@@ -247,7 +376,7 @@ while running:
                 elif "me gusta" in recognized_text.lower() and "verbos" in recognized_text.lower():
                     target_position=(486,414)
                 else :
-                    print("esa calleno se ha reconocido")
+                    print("esa interseccion no se ha reconocido")
             
             elif "esquina" not in recognized_text.lower() and "calle" not in recognized_text.lower() and "avenida" not in recognized_text.lower():
                 if "juguetería"  in recognized_text.lower():
