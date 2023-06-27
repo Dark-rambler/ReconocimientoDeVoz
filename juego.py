@@ -7,7 +7,7 @@ import speech_recognition as sr
 from collections import deque
 
 
-class Player(object):
+class Eva(object):
     def __init__(self, initial_position):
         self.rect = pygame.Rect(initial_position[0], initial_position[1], 16, 16)
 
@@ -57,7 +57,7 @@ screen = pygame.display.set_mode((window_width, window_height))
 
 clock = pygame.time.Clock()
 walls = []
-player = Player((18,108))
+Eva = Eva((18,108))
 
 #coordenadas en X
 PROFE_INOLVIDABLE = [90,324]
@@ -65,7 +65,7 @@ VOCABULARIO = [324,612]
 SER_Y_ESTAR = [180,324]
 INSTITUTO = [612, 324, 684]
 HABLO_ESPANIOL = [90, 180, 288]
-PROFEDEELE = [306]
+PROFEDEELE = [486,576]
 SUSTANTIVO = [90, 180, 324]
 ME_GUSTA = [486,576]
 ERRORES = [90, 180, 324]
@@ -100,7 +100,7 @@ level = [
     list("WWWWW WWWW WWWWWWW WWWWWWWWWWWWWWWWWWW  W"),
     list("WWWWW WWWW WWWWWW  WWWWWWWWWWWWWWWWWWW  W"),
     list("WWWWW WWWW WWWWW     WWWWWWWWWWWWWWWW  WW"),
-    list("WWWWW  WWW WWWWW WWW                  WWW"),
+    list("WWWWW WWWW WWWWW WWW                  WWW"),
     list("W                WWW                  WWW"),
     list("WWWWW WWWW WWWWW     WWWWWW WWWW WWW  WWW"),
     list("WWWWW WWWW WWWWWW   WWWWWWW WWWW WWWW  WW"),
@@ -127,7 +127,7 @@ def find_empty_positions():
 
 empty_positions = find_empty_positions()
 
-def get_player_positions(recognized_text):
+def get_Eva_positions(recognized_text):
     positions = []
     for char in recognized_text:
         if char.isalpha():
@@ -178,12 +178,12 @@ while running:
         try:
             recognized_text = recognizer.recognize_google(audio, language="es-ES")
             print("Texto reconocido:", recognized_text.lower())
-            x, y = player.rect.x, player.rect.y
+            x, y = Eva.rect.x, Eva.rect.y
             print(x,y)
             target_position=(x,y)
             target_x, target_y = target_position
-            # Process recognized text and move the player accordingly
-            if("Eva" in recognized_text.lower()):
+            # Process recognized text and move the Eva accordingly
+            if("eva" in recognized_text.lower()):
                 if("avanzar" in recognized_text.lower() and "cuadra" in recognized_text.lower()):
                     if("profe inolvidable" in recognized_text.lower() and x in PROFE_INOLVIDABLE):
                         if(PROFE_INOLVIDABLE.index(x) == len(PROFE_INOLVIDABLE)-1):
@@ -481,13 +481,13 @@ while running:
                     if path:
                             for step in path:
                                 x, y = step
-                                player.move(x - player.rect.x, y - player.rect.y)
+                                Eva.move(x - Eva.rect.x, y - Eva.rect.y)
                                 pygame.time.delay(100)  # Delay between each step
                                 # Draw the scene after each step
                                 screen.blit(back, (0, 0, 1000, 540))
                                 for wall in walls:
                                     screen.blit(transparent_image, wall.rect)
-                                pygame.draw.rect(screen, (255, 20, 0), player.rect)
+                                pygame.draw.rect(screen, (255, 20, 0), Eva.rect)
                                 pygame.display.flip()
                     else:
                             print("No se encontró un camino")
@@ -503,7 +503,7 @@ while running:
     screen.blit(back, (0, 0, 1000, 540))
     for wall in walls:
         screen.blit(transparent_image, wall.rect)
-    pygame.draw.rect(screen, (255, 20, 0), player.rect)
+    pygame.draw.rect(screen, (255, 20, 0), Eva.rect)
     pygame.display.flip()
 
 pygame.quit()
